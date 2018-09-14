@@ -3,8 +3,15 @@ from masonite.routes import Get, Post
 from dashboard.routes import routes as DashboardRoutes
 
 ROUTES = [
-    Get().route('/', 'WelcomeController@show').name('welcome'),
-    DashboardRoutes()
+    Get().route('/', 'HomeController@show').name('welcome'),
+    DashboardRoutes(),
+
+    Get().route('/posts', 'AllPostsController@show'),
+    Get().route('/post/@id:string', 'ShowPostController@show'),
+
+    Get().route('/create', 'NewPostController@show'),
+    Post().route('/create', 'NewPostController@store'),
+
 ]
 
 ROUTES = ROUTES + [

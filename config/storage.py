@@ -57,6 +57,10 @@ STATICFILES = {
     'storage/static': 'static/',
     'storage/compiled': 'static/',
     'storage/uploads': 'static/',
+    'storage/static/assets/css': 'css/',
+    'storage/static/assets/img': 'img/',
+    'storage/static/assets/js': 'js/',
+    'storage/static/assets/html': 'html/'
 }
 
 '''

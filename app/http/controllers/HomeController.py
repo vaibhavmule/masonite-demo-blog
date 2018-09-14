@@ -1,13 +1,8 @@
-''' A Module Description '''
-from masonite.facades.Auth import Auth
+''' Welcome The User To Masonite '''
 
-class HomeController(object):
-    ''' Home Dashboard Controller '''
+class HomeController:
+    ''' Controller For Welcoming The User '''
 
-    def __init__(self):
-        pass
-
-    def show(self, Request, Application):
-        if not Auth(Request).user():
-            Request.redirect('/login')
-        return view('auth/home', {'app': Application, 'Auth': Auth(Request)})
+    def show(self, Application):
+        ''' Show Welcome Template '''
+        return view('index', {'app': Application})
