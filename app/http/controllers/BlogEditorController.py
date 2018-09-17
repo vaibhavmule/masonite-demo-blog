@@ -2,31 +2,43 @@
 from app.Post import Post
 
 from masonite.facades.Auth import Auth
-from slugify import slugify
+# from slugify import slugify
 
 import re
 import unidecode
+
 
 def slugify(text):
     text = unidecode.unidecode(text).lower()
     return re.sub(r'\W+', '-', text)
 
-class NewPostController(object):
+
+class BlogEditorController(object):
     ''' Home Blog Dashboard Controller '''
 
     def __init__(self):
         pass
 
-    def show(self, Request, Application):
+    def show(self, Request):
         """ Blog controller for Dashboard"""
 
-        # if not Auth(Request).user():
-        #     Request.redirect('/login')
+        if not Auth(Request).user():
+            Request.redirect('dashboard')
 
-        # return view('dashboard/blog/new', {'app': Application, 'Auth': Auth(Request)})
-        return view('create')
+        posts = Post.all()
 
-    def store(self, Request):
+        return view('dashboard/blog', {'Auth': Auth(Request),
+                                       'posts': posts})
+
+    def show_create(self, Request):
+        """ Blog controller for Dashboard"""
+
+        if not Auth(Request).user():
+            Request.redirect('/dashboard')
+
+        return view('dashboard/post/create', {'Auth': Auth(Request)})
+
+    def create(self, Request):
         """ Create new post """
 
         title = Request.input('title')
@@ -43,4 +55,4 @@ class NewPostController(object):
             author_id=1
         )
 
-        return 'post created'
+        return view('dashboard/blog', {'Auth': Auth(Request)})

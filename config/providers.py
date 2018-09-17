@@ -17,7 +17,7 @@ from masonite.providers import (
     CacheProvider,
     CsrfProvider,
 )
-
+from app.providers.BlogProvider import BlogProvider
 from app.providers.MiddlewareProvider import MiddlewareProvider
 from app.providers.UserModelProvider import UserModelProvider
 from dashboard.providers import DashboardProvider
@@ -60,5 +60,6 @@ PROVIDERS = [
     # Application Providers
     UserModelProvider,
     MiddlewareProvider,
-    DashboardProvider
+    DashboardProvider,
+    BlogProvider
 ]

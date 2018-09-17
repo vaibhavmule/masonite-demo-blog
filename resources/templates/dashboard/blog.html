@@ -1,0 +1,19 @@
+{% extends 'dashboard/base.html' %}
+​
+{% block content %}
+
+      {% for post in posts %}
+        <h3 >{{ post.title }}</h3>
+  
+      <p class="post-subtitle">{{ post.body }}</p>
+      <!-- <p class="post-meta">Posted by
+                  <a href="#">Start Bootstrap</a>
+                  on September 24, 2018</p> -->
+      <hr>
+      {% endfor %}
+    </div>
+
+
+
+
+{% endblock %}

@@ -9,7 +9,9 @@ class ShowPostController:
 
     def show(self, Request):
         """ Blog controller for Dashboard"""
+
+        # Get post via slug
         slug = Request.param('id')
-        return slug
-        # post = Post.where('slug', str(slug))
-        # return view('post', {'post': post})
+        posts = Post.where('slug', slug).get()
+        post = posts[0]
+        return view('blog/post', {'post': post})

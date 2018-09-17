@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('img/nightlife1.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="site-heading">
+          <h1>My Blog</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="col-lg-9 col-md-10 mx-auto">
+  <div id='bleedingcool' class="post-preview">
+    {% for post in posts %}
+    <a href="/blog/post/{{ post.slug }}">
+      <h2 class="post-title post">
+        {{ post.title }}
+    </a>
+    </h2>
+
+    <p class="post-subtitle">
+      {{ post.body }}
+    </p>
+    <!-- <p class="post-meta">Posted by
+                <a href="#">Start Bootstrap</a>
+                on September 24, 2018</p> -->
+    <hr>
+    {% endfor %}
+  </div>
+
+  {% endblock %}

@@ -4,13 +4,16 @@ from dashboard.routes import routes as DashboardRoutes
 
 ROUTES = [
     Get().route('/', 'HomeController@show').name('welcome'),
+    
     DashboardRoutes(),
 
-    Get().route('/posts', 'AllPostsController@show'),
-    Get().route('/post/@id:string', 'ShowPostController@show'),
+    Get().route('/blog', 'PostsController@show_all'),
+    Get().route('/blog/post/@id', 'PostsController@show_one'),
 
-    Get().route('/create', 'NewPostController@show'),
-    Post().route('/create', 'NewPostController@store'),
+    Get().route('/dashboard/blog', 'BlogEditorController@show'),
+    Get().route('/dashboard/post/create', 'BlogEditorController@show_create'),
+    Post().route('/dashboard/post/create', 'BlogEditorController@create')
+
 
 ]
 
