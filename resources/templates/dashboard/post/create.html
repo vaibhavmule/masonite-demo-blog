@@ -2,26 +2,18 @@
 {% block content %}
 
 
+<form action='/dashboard/post/create' method="POST">
+    {{ csrf_field|safe }}
+    <label> Title </label>
+    <input type="name" name="title"><br>
+    ​
+    <label> Body </label>
+    <textarea name="body"></textarea>
 
-<!-- New Blog Form -->
-<!-- <div class="container">
-    <div class="row">
-        <div class="col-lg-12"> -->
-            <form action="/create" method="POST">
-                {{ csrf_field|safe }}
-                <label> Title </label>
-                <input type="name" name="title"><br>
-                ​
-                <label> Body </label>
-                <textarea name="body"></textarea>
+    <label> Category </label>
+    <textarea name="category"></textarea>
+    ​
+    <input type="submit" value="Post!">
+</form>
 
-                <label> Category </label>
-                <textarea name="category"></textarea>
-                ​
-                <input type="submit" value="Post!">
-            </form>
-<!-- 
-        </div>
-    </div>
-</div> -->
 {% endblock %}

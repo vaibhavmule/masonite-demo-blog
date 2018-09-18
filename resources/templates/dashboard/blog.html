@@ -1,19 +1,17 @@
 {% extends 'dashboard/base.html' %}
 ​
 {% block content %}
-
-      {% for post in posts %}
-        <h3 >{{ post.title }}</h3>
-  
-      <p class="post-subtitle">{{ post.body }}</p>
-      <!-- <p class="post-meta">Posted by
-                  <a href="#">Start Bootstrap</a>
-                  on September 24, 2018</p> -->
-      <hr>
-      {% endfor %}
+<div class="xs-9">
+  {% for post in posts %}
+  <div id="{{ post.slug }}" class="col-xs-6">
+    <h3>{{ post.title }}</h3>
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="/dashboard/post/{{ post.slug }}/update">Update <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/dashboard/post/{{ post.slug }}/delete">Delete</a>
     </div>
-
-
-
+  </div>
+</div>
+{% endfor %}
+</div>
 
 {% endblock %}

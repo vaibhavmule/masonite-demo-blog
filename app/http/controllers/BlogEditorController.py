@@ -19,7 +19,7 @@ class BlogEditorController(object):
     def __init__(self):
         pass
 
-    def show(self, Request):
+    def show_all(self, Request):
         """ Blog controller for Dashboard"""
 
         if not Auth(Request).user():
@@ -56,3 +56,59 @@ class BlogEditorController(object):
         )
 
         return view('dashboard/blog', {'Auth': Auth(Request)})
+
+    def show_update(self, Request):
+
+        if not Auth(Request).user():
+            Request.redirect('/dashboard')
+
+        # Get post via slug
+        slug = Request.param('id')
+        posts = Post.where('slug', slug).get()
+        post = posts[0]
+        # post = Post.find(Request.param('id'))
+
+
+        return view('dashboard/post/update', {'post': post, 'Auth': Auth(Request)})
+
+    def update(self, Request):
+
+        if not Auth(Request).user():
+            Request.redirect('/dashboard')
+
+        slug = Request.param('id')
+        posts = Post.where('slug', slug).get()
+        post = posts[0]
+        # post = Post.find(Request.param('id'))
+
+
+        post.title = Request.input('title')
+        post.body = Request.input('body')
+
+        post.save()
+
+        return view('dashboard/blog', {'Auth': Auth(Request)})
+
+    def show_delete(self, Request):
+
+        if not Auth(Request).user():
+            Request.redirect('/dashboard')
+
+        slug = Request.param('id')
+        posts = Post.where('slug', slug).get()
+        post = posts[0]
+
+        return view('dashboard/post/delete', {'post': post, 'Auth': Auth(Request)})
+
+    def delete(self, Request):
+
+        if not Auth(Request).user():
+            Request.redirect('/dashboard')
+
+        response = Request.input('delete')
+        slug = Request.param('id')
+        posts = Post.where('slug', slug).get()
+        post = posts[0]        
+        post.delete()
+        return view('dashboard/blog', {'Auth': Auth(Request)})
+        # return "Post is not in database."
