@@ -17,7 +17,7 @@
 
 <div class="col-lg-9 col-md-10 mx-auto">
   <div id='bleedingcool' class="post-preview">
-    {% for post in posts %}
+    {% for post in posts|reverse %}
     <a href="/blog/post/{{ post.slug }}">
       <h2 class="post-title post">
         {{ post.title }}

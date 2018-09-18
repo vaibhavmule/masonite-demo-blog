@@ -1,17 +1,27 @@
 {% extends 'dashboard/base.html' %}
 ​
 {% block content %}
-<div class="xs-9">
-  {% for post in posts %}
-  <div id="{{ post.slug }}" class="col-xs-6">
-    <h3>{{ post.title }}</h3>
-    <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="/dashboard/post/{{ post.slug }}/update">Update <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="/dashboard/post/{{ post.slug }}/delete">Delete</a>
+<div class="col-xs-9">
+  <div class="col-xs-8">
+    <!-- Showing posts and  -->
+    {% for post in posts|reverse %}
+    <div id="{{ post.slug }}">
+      <h3>{{ post.title }}</h3>
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="/dashboard/post/{{ post.slug }}/update">Update <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="/dashboard/post/{{ post.slug }}/delete">Delete</a>
+      </div>
     </div>
+    <br>
+    {% endfor %}
   </div>
-</div>
-{% endfor %}
+  <div class="col-xs-1">
+    <form action='/dashboard/post/create' method="GET">
+      {{ csrf_field|safe }}
+      ​
+      <input name="create" type="submit" value="Create New Post">
+    </form>
+  </div>
 </div>
 
 {% endblock %}

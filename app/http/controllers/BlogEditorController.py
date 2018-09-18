@@ -41,6 +41,9 @@ class BlogEditorController(object):
     def create(self, Request):
         """ Create new post """
 
+        if not Auth(Request).user():
+            Request.redirect('/dashboard')
+
         title = Request.input('title')
         slug = slugify(title)
         category = Request.input('category')
@@ -54,7 +57,7 @@ class BlogEditorController(object):
             # author_id=Request.user().id
             author_id=1
         )
-
+        
         return view('dashboard/blog', {'Auth': Auth(Request)})
 
     def show_update(self, Request):
@@ -66,8 +69,6 @@ class BlogEditorController(object):
         slug = Request.param('id')
         posts = Post.where('slug', slug).get()
         post = posts[0]
-        # post = Post.find(Request.param('id'))
-
 
         return view('dashboard/post/update', {'post': post, 'Auth': Auth(Request)})
 
@@ -79,8 +80,6 @@ class BlogEditorController(object):
         slug = Request.param('id')
         posts = Post.where('slug', slug).get()
         post = posts[0]
-        # post = Post.find(Request.param('id'))
-
 
         post.title = Request.input('title')
         post.body = Request.input('body')
@@ -105,10 +104,8 @@ class BlogEditorController(object):
         if not Auth(Request).user():
             Request.redirect('/dashboard')
 
-        response = Request.input('delete')
         slug = Request.param('id')
         posts = Post.where('slug', slug).get()
         post = posts[0]        
         post.delete()
         return view('dashboard/blog', {'Auth': Auth(Request)})
-        # return "Post is not in database."
