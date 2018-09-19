@@ -10,11 +10,11 @@ class Post(Model):
                     'author_id',
                     'body',
                     'category',
-                    'slug']
+                    'slug',
+                    'image']
 
     @belongs_to('author_id', 'id')
     def author(self):
         from app.User import User
         return User
-
     

@@ -1,4 +1,5 @@
 ''' A Module Description '''
+from mistune import Markdown
 from app.Post import Post
 from masonite.facades.Auth import Auth
 
@@ -7,7 +8,7 @@ class PostsController(object):
     ''' Home Blog Controller '''
 
     def __init__(self):
-        pass
+        self.markdown = Markdown()
 
     def show_all(self):
         """ Blog controller for Dashboard"""
@@ -21,4 +22,5 @@ class PostsController(object):
         slug = Request.param('id')
         posts = Post.where('slug', slug).get()
         post = posts[0]
+        post.body = self.markdown(post.body)
         return view('blog/post', {'post': post})

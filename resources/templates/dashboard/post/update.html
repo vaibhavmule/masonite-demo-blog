@@ -7,13 +7,19 @@
             <label for="">Title</label>
             <input type="text" class="form-control" name="title" value="{{ post.title }}"><br>
         </div>
+        <div class="form-group">
+          <label>Image</label>
+          <input type="file" name="file_upload">
+        </div>     
         ​ <div class="form-group">
             <label>Body</label>
             <textarea name="body" class="form-control" rows="25">{{ post.body }}</textarea><br>
         </div>
         ​<div class="form-group">
             <button type="update" class="btn btn-primary">Update</button>
+            <a class="btn btn-primary" href="/dashboard/blog" role="button">Cancel</a>
         </div>
     </form>
+
 </div>
 {% endblock %}

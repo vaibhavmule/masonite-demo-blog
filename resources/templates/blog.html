@@ -2,7 +2,7 @@
 {% block content %}
 
 <!-- Page Header -->
-<header class="masthead" style="background-image: url('img/nightlife1.jpg')">
+<header class="masthead" style="background-image: url('/img/nightlife1.jpg')">
   <div class="overlay"></div>
   <div class="container">
     <div class="row">
@@ -16,7 +16,7 @@
 </header>
 
 <div class="col-lg-9 col-md-10 mx-auto">
-  <div id='bleedingcool' class="post-preview">
+  <div class="post-preview">
     {% for post in posts|reverse %}
     <a href="/blog/post/{{ post.slug }}">
       <h2 class="post-title post">
