@@ -21,11 +21,19 @@
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
           
+          <!-- Displays post -->
           {{ post.body|safe }}
         
-        <!-- <p class="post-meta">Posted by
-                      <a href="#">Start Bootstrap</a>
-                      on September 24, 2018</p> -->
+          <!-- Displays Posts Categories if there are any -->
+          {% if post.category %}
+            {% set categories = post.category.split(',') %}
+            {% for cat in categories %}
+              <div class="alert alert-dark" role="alert" style="display: inline-block;">
+                {{ cat }}
+              </div>
+            {% endfor %}
+          {% endif %}
+
       </div>
     </div>
   </div>

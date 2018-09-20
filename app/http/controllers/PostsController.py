@@ -5,18 +5,18 @@ from masonite.facades.Auth import Auth
 
 
 class PostsController(object):
-    ''' Home Blog Controller '''
+    ''' Posts Controller '''
 
     def __init__(self):
         self.markdown = Markdown()
 
     def show_all(self):
-        """ Blog controller for Dashboard"""
+        """ Controller to show all posts"""
         posts = Post.all()
         return view('blog', {'posts': posts})
 
     def show_one(self, Request):
-        """ Blog controller for Dashboard"""
+        """ Controller to show single post"""
 
         # Get post via slug
         slug = Request.param('id')

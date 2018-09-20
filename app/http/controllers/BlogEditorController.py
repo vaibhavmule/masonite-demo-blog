@@ -7,19 +7,20 @@ from masonite.facades.Auth import Auth
     
 
 def slugify(text):
+    # helper function that creates slugs for the articles
     text = unidecode.unidecode(text).lower()
     return re.sub(r'\W+', '-', text)
 
 
 class BlogEditorController(object):
-    ''' Home Blog Dashboard Controller '''
+    ''' Dashboard Blog Controller '''
 
     def __init__(self):
         pass
         
 
     def show_all(self, Request):
-        """ Blog controller for Dashboard"""
+        """ Display all posts in blog editor """
 
         if not Auth(Request).user():
             Request.redirect('dashboard')
@@ -30,7 +31,7 @@ class BlogEditorController(object):
                                        'posts': [post for post in posts]})
 
     def show_create(self, Request):
-        """ Blog controller for Dashboard"""
+        """ Display page to create post"""
 
         if not Auth(Request).user():
             Request.redirect('/dashboard')
@@ -43,30 +44,30 @@ class BlogEditorController(object):
         if not Auth(Request).user():
             Request.redirect('/dashboard')
 
-        title = Request.input('title')
-        slug = slugify(title)
-        category = Request.input('category')
-        body = Request.input('body')
+        # Make slug
+        slug = slugify(Request.input('body'))
 
+        # Save image
         try:
             image=Upload.driver('disk').store(Request.input('file_upload'), location='storage/blog/img')
         except AttributeError:
-            image=None
+            # If user did not pick image, set image to none. (Load default)
+            image="nightlife1.jpg"
         
 
         Post.create(
-            title=title,
+            title=Request.input('body'),
             slug=slug,
-            category=category,
-            body=body,
+            category=Request.input('category'),
+            body=Request.input('body'),
             image=image,
-            # author_id=Request.user().id
             author_id=1
         )
 
         return view('dashboard/blog', {'Auth': Auth(Request)})
 
     def show_update(self, Request):
+        """ Display Post Update page """
 
         if not Auth(Request).user():
             Request.redirect('/dashboard')
@@ -79,6 +80,7 @@ class BlogEditorController(object):
         return view('dashboard/post/update', {'post': post, 'Auth': Auth(Request)})
 
     def update(self, Request):
+        """ Update Post Controller """
 
         if not Auth(Request).user():
             Request.redirect('/dashboard')
@@ -87,14 +89,19 @@ class BlogEditorController(object):
         posts = Post.where('slug', slug).get()
         post = posts[0]
 
-        posts.title = Request.input('title')
+        # Updates Post
+        post.title = Request.input('title')
+        post.slug = slugify(post.title)
         post.body = Request.input('body')
+        post.category = Request.input('category')
 
         post.save()
 
         return view('dashboard/blog', {'Auth': Auth(Request)})
 
     def show_delete(self, Request):
+        """ Display Post Delete page """
+
 
         if not Auth(Request).user():
             Request.redirect('/dashboard')
@@ -106,6 +113,7 @@ class BlogEditorController(object):
         return view('dashboard/post/delete', {'post': post, 'Auth': Auth(Request)})
 
     def delete(self, Request):
+        """ Delete Post Controller """
 
         if not Auth(Request).user():
             Request.redirect('/dashboard')

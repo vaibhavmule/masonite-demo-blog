@@ -13,7 +13,6 @@ class CreateUsersTable(Migration):
             table.string('email').unique()
             table.string('password')
             table.string('remember_token').nullable()
-            table.integer('is_admin').nullable()
             table.timestamps()
 
     def down(self):
