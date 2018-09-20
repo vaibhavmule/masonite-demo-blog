@@ -5,10 +5,6 @@ class BlogEditorLink(BaseLink):
     display = 'Blog Editor'
     url = '/dashboard/blog'
 
-# class BlogEditorLink(BaseLink):
-#     display = 'Blog Create'
-#     url = '/dashboard/blog/create'
-
 class BlogProvider(ServiceProvider):
 
     def register(self):
