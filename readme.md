@@ -1,4 +1,4 @@
-#Masonite Demo Blog
+# Masonite Demo Blog
 
 This project allows one to create a blog via Masonite. 
 
