@@ -18,6 +18,7 @@ from masonite.providers import (
     CsrfProvider,
 )
 from app.providers.BlogProvider import BlogProvider
+from app.providers.RenderEngineProvider import RenderEngineProvider
 from app.providers.MiddlewareProvider import MiddlewareProvider
 from app.providers.UserModelProvider import UserModelProvider
 from dashboard.providers import DashboardProvider
@@ -56,10 +57,11 @@ PROVIDERS = [
     HelpersProvider,
 
     # Third Party Providers
+    RenderEngineProvider,
 
     # Application Providers
     UserModelProvider,
     MiddlewareProvider,
     DashboardProvider,
-    BlogProvider
+    BlogProvider,
 ]
