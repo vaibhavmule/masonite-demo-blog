@@ -6,7 +6,11 @@
     <!-- Showing posts and  -->
     {% for post in posts|reverse %}
     <div id="{{ post.slug }}">
-      <h3>{{ post.title }}</h3>
+      <h3>{{ post.title }}
+        {% if post.is_live == True %}
+          (active)
+        {% endif %}
+      </h3>
       {# Display when post was either created or last updated #}
           {% if  post.created_at.to_formatted_date_string() ==  post.updated_at.to_formatted_date_string() %}
               <p class="post-meta">Posted by
@@ -20,6 +24,8 @@
       <div class="navbar-nav">
         <a class="nav-item nav-link active" href="/dashboard/post/{{ post.slug }}/update">Update <span class="sr-only">(current)</span></a>
         <a class="nav-item nav-link" href="/dashboard/post/{{ post.slug }}/delete">Delete</a>
+        <a class="nav-item nav-link" href="/dashboard/post/{{ post.slug }}/activate">Activate</a>
+        <a class="nav-item nav-link" href="/dashboard/post/{{ post.slug }}/deactivate">Deactivate</a>
       </div>
     </div>
     <br>

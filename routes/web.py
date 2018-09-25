@@ -24,8 +24,12 @@ ROUTES = [
     Post().route('/dashboard/post/@id/update', 'BlogEditorController@update'),
 
     Get().route('/dashboard/post/@id/delete', 'BlogEditorController@show_delete'),
-    Post().route('/dashboard/post/@id/delete', 'BlogEditorController@delete')
+    Post().route('/dashboard/post/@id/delete', 'BlogEditorController@delete'),
 
+    Get().route('/dashboard/post/@id/activate', 'BlogEditorController@activate'),
+    Get().route('/dashboard/post/@id/deactivate', 'BlogEditorController@deactivate'),
+
+    Get().route('/dashboard/post/preview/@id', 'BlogEditorController@preview'),
 
 
 ]

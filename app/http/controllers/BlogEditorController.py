@@ -1,5 +1,6 @@
 ''' A Module Description '''
 from app.Post import Post
+from app.User import User
 from masonite.facades.Auth import Auth
 
 from helpers.BlogHelper import slugify
@@ -19,7 +20,7 @@ class BlogEditorController(object):
 
         posts = Post.all()
 
-        return view('dashboard/blog', {'Auth': Auth(Request),
+        return view('dashboard/blog', {'author': User,'Auth': Auth(Request),
                                        'posts': posts})
 
     def show_create(self, Request):
@@ -89,7 +90,8 @@ class BlogEditorController(object):
 
         post.save()
 
-        return view('dashboard/blog', {'Auth': Auth(Request)})
+        return view('dashboard/post/update', {'Auth': Auth(Request)})
+ 
 
     def show_delete(self, Request):
         """ Display Post Delete page """
@@ -114,4 +116,43 @@ class BlogEditorController(object):
         posts = Post.where('slug', slug).get()
         post = posts[0]
         post.delete()
+        return view('dashboard/blog', {'Auth': Auth(Request)})
+
+    def preview(self, Request, RenderEngine):
+        """ Display all posts in blog editor """
+
+        if not Auth(Request).user():
+            Request.redirect('dashboard')
+
+        # Get post via slug
+        slug = Request.param('id')
+        posts = Post.where('slug', slug).get()
+        post = posts[0]
+
+        return view('dashboard/post/preview', {'author': User, 'Auth': Auth(Request),
+                                       'posts': post})
+
+    def activate(self, Request):
+        """ Activates post to be displayed """
+        if not Auth(Request).user():
+            Request.redirect('dashboard')
+
+        slug = Request.param('id')
+        posts = Post.where('slug', slug).get()
+        post = posts[0]
+        post.is_live = True
+        post.save()
+        return view('dashboard/blog', {'Auth': Auth(Request)})
+
+    def deactivate(self, Request):
+        """ Removes post from active list """
+
+        if not Auth(Request).user():
+            Request.redirect('dashboard')
+
+        slug = Request.param('id')
+        posts = Post.where('slug', slug).get()
+        post = posts[0]
+        post.is_live = False
+        post.save()
         return view('dashboard/blog', {'Auth': Auth(Request)})

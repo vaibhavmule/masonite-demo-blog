@@ -13,7 +13,7 @@ class PostsController(object):
     def show_all(self):
         """ Controller to show all posts"""
         
-        posts = Post.all()
+        posts = Post.where('is_live', True).get()
         return view('blog', {'author': User, 'posts': posts})
 
     def show_one(self, Request, RenderEngine):
@@ -21,7 +21,7 @@ class PostsController(object):
 
         # Get post via slug
         slug = Request.param('id')
-        posts = Post.where('slug', slug).get()
+        posts = Post.where('slug', slug).where('is_live', True).get()
         post = posts[0]
         post.body = RenderEngine(post.body)
 
@@ -32,7 +32,7 @@ class PostsController(object):
 
         category = Request.param('id')
 
-        posts = Post.where('category', category).get()
+        posts = Post.where('category', category).where('is_live', True).get()
 
         return view('blog/category', {'author': User,'category': category, 'posts': posts})
 
@@ -41,7 +41,7 @@ class PostsController(object):
 
         user_name = Request.param('id')
 
-        author = User.where('user_name', user_name).get()
+        author = User.where('user_name', user_name).where('is_live', True).get()
 
         posts = Post.where('author_id', author[0].id).get()
 

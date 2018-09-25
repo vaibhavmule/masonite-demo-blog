@@ -16,7 +16,8 @@
           <input name="category" value="{{ post.category }}"></input>
         </div>
         ​<div class="form-group">
-            <button type="update" class="btn btn-primary">Update</button>
+            <a href="/dashboard/post/preview/{{ post.slug }}" class="btn btn-primary" role="button" target="_blank" name="preview">Preview</a>
+            <button type="update" class="btn btn-primary" name="update">Update</button>
             <a class="btn btn-primary" href="/dashboard/blog" role="button">Cancel</a>
         </div>
     </form>
