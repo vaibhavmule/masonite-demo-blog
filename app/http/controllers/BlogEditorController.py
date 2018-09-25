@@ -1,17 +1,9 @@
 ''' A Module Description '''
-import re
-import unidecode
-
 from app.Post import Post
 from masonite.facades.Auth import Auth
+
+from helpers.BlogHelper import slugify
     
-
-def slugify(text):
-    # helper function that creates slugs for the articles
-    text = unidecode.unidecode(text).lower()
-    return re.sub(r'\W+', '-', text)
-
-
 class BlogEditorController(object):
     ''' Dashboard Blog Controller '''
 

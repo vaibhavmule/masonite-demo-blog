@@ -11,6 +11,7 @@ class PostsController(object):
 
     def show_all(self):
         """ Controller to show all posts"""
+        
         posts = Post.all()
         return view('blog', {'posts': posts})
 
