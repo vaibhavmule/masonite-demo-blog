@@ -13,6 +13,8 @@ ROUTES = [
 
     Get().route('/blog/category/@id', 'PostsController@show_category'),
 
+    Get().route('/blog/author/@id', 'PostsController@show_author'),
+
     Get().route('/dashboard/blog', 'BlogEditorController@show_all'),
 
     Get().route('/dashboard/post/create', 'BlogEditorController@show_create'),

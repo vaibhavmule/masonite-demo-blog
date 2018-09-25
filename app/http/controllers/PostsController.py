@@ -28,10 +28,21 @@ class PostsController(object):
         return view('blog/post', {'author': User,'post': post})
 
     def show_category(self, Request):
-        """ Controller to show category"""
+        """ Controller to show poss by category"""
 
         category = Request.param('id')
 
         posts = Post.where('category', category).get()
 
-        return view('blog/category', {'category': category, 'posts': posts})
+        return view('blog/category', {'author': User,'category': category, 'posts': posts})
+
+    def show_author(self, Request):
+        """ Controller to show posts by author"""
+
+        user_name = Request.param('id')
+
+        author = User.where('user_name', user_name).get()
+
+        posts = Post.where('author_id', author[0].id).get()
+
+        return view('blog/author', {'author': author[0].name, 'posts': posts})
