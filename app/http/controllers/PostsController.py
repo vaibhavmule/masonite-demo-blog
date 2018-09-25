@@ -1,5 +1,6 @@
 ''' A Module Description '''
 from app.Post import Post
+from app.User import User
 from masonite.facades.Auth import Auth
 
 
@@ -13,7 +14,7 @@ class PostsController(object):
         """ Controller to show all posts"""
         
         posts = Post.all()
-        return view('blog', {'posts': posts})
+        return view('blog', {'author': User, 'posts': posts})
 
     def show_one(self, Request, RenderEngine):
         """ Controller to show single post"""
@@ -23,7 +24,8 @@ class PostsController(object):
         posts = Post.where('slug', slug).get()
         post = posts[0]
         post.body = RenderEngine(post.body)
-        return view('blog/post', {'post': post})
+
+        return view('blog/post', {'author': User,'post': post})
 
     def show_category(self, Request):
         """ Controller to show category"""

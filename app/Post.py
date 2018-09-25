@@ -1,6 +1,8 @@
 ''' A Post Database Model '''
 from config.database import Model
 from orator.orm import belongs_to
+from orator.orm import scope
+from app.User import User
 
 
 class Post(Model):
@@ -15,5 +17,6 @@ class Post(Model):
 
     @belongs_to('author_id', 'id')
     def author(self):
-        from app.User import User
         return User
+
+

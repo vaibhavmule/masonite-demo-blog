@@ -10,11 +10,11 @@
       {# Display when post was either created or last updated #}
           {% if  post.created_at.to_formatted_date_string() ==  post.updated_at.to_formatted_date_string() %}
               <p class="post-meta">Posted by
-                  <a href="#">Tony Hammack</a> on 
+                  <a href="#">{{ author.find(post.author_id).name }}</a> on 
                 {{ post.created_at.to_formatted_date_string() }}</p>
           {% else %}
             <p class="post-meta">Updated by
-                  <a href="#">Tony Hammack</a> on 
+                  <a href="#">{{ author.find(post.author_id).name }}</a> on 
                 {{ post.updated_at.to_formatted_date_string() }}</p>
           {% endif %}
       <div class="navbar-nav">
@@ -25,6 +25,7 @@
     <br>
     {% endfor %}
   </div>
+  
   <div class="col-xs-1">
     <form action='/dashboard/post/create' method="GET">
       {{ csrf_field|safe }}
