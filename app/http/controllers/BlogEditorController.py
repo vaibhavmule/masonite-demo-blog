@@ -28,7 +28,7 @@ class BlogEditorController(object):
         posts = Post.all()
 
         return view('dashboard/blog', {'Auth': Auth(Request),
-                                       'posts': [post for post in posts]})
+                                       'posts': posts})
 
     def show_create(self, Request):
         """ Display page to create post"""

@@ -10,6 +10,9 @@ ROUTES = [
     Get().route('/blog', 'PostsController@show_all'),
     Get().route('/blog/post/@id', 'PostsController@show_one'),
 
+
+    Get().route('/blog/category/@id', 'PostsController@show_category'),
+
     Get().route('/dashboard/blog', 'BlogEditorController@show_all'),
 
     Get().route('/dashboard/post/create', 'BlogEditorController@show_create'),

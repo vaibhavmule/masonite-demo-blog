@@ -6,7 +6,7 @@ class BlogEditorLink(BaseLink):
     url = '/dashboard/blog'
 
 class BlogProvider(ServiceProvider):
-
+	
     def register(self):
         self.app.bind('BlogEditor', BlogEditorLink)
 

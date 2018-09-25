@@ -24,3 +24,12 @@ class PostsController(object):
         post = posts[0]
         post.body = self.markdown(post.body)
         return view('blog/post', {'post': post})
+
+    def show_category(self, Request):
+        """ Controller to show category"""
+
+        category = Request.param('id')
+
+        posts = Post.where('category', category).get()
+
+        return view('blog/category', {'category': category, 'posts': posts})

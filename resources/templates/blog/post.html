@@ -29,7 +29,7 @@
             {% set categories = post.category.split(',') %}
             {% for cat in categories %}
               <div class="alert alert-dark" role="alert" style="display: inline-block;">
-                {{ cat }}
+                <a href="/blog/category/{{ cat }}">{{ cat }}</a>
               </div>
             {% endfor %}
           {% endif %}
