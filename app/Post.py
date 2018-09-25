@@ -17,4 +17,3 @@ class Post(Model):
     def author(self):
         from app.User import User
         return User
-    
