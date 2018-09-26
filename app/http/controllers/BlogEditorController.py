@@ -3,7 +3,7 @@ from app.Post import Post
 from app.User import User
 from masonite.facades.Auth import Auth
 
-from helpers.BlogHelper import slugify
+from helpers.DashboardHelper import remove_whitespaces, slugify
     
 class BlogEditorController(object):
     ''' Dashboard Blog Controller '''
@@ -49,12 +49,13 @@ class BlogEditorController(object):
         
 
         Post.create(
-            title=Request.input('body'),
+            title=remove_whitespaces(Request.input('title')),
             slug=slug,
-            category=Request.input('category'),
-            body=Request.input('body'),
+            category=remove_whitespaces(Request.input('category')),
+            body=remove_whitespaces(Request.input('body')),
             image=image,
-            author_id=1
+            author_id=1,
+            is_live=0
         )
 
         return view('dashboard/blog', {'Auth': Auth(Request)})
@@ -83,10 +84,10 @@ class BlogEditorController(object):
         post = posts[0]
 
         # Updates Post
-        post.title = Request.input('title')
+        post.title = remove_whitespaces(Request.input('title'))
         post.slug = slugify(post.title)
-        post.body = Request.input('body')
-        post.category = Request.input('category')
+        post.body = remove_whitespaces(Request.input('body'))
+        post.category = remove_whitespaces(Request.input('category'))
 
         post.save()
 

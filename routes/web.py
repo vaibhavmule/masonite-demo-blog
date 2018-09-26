@@ -4,7 +4,7 @@ from dashboard.routes import routes as DashboardRoutes
 
 ROUTES = [
     Get().route('/', 'HomeController@show').name('welcome'),
-    
+
     DashboardRoutes(),
 
     Get().route('/blog', 'PostsController@show_all'),
@@ -12,7 +12,6 @@ ROUTES = [
 
 
     Get().route('/blog/category/@id', 'PostsController@show_category'),
-
     Get().route('/blog/author/@id', 'PostsController@show_author'),
 
     Get().route('/dashboard/blog', 'BlogEditorController@show_all'),
@@ -30,9 +29,9 @@ ROUTES = [
     Get().route('/dashboard/post/@id/deactivate', 'BlogEditorController@deactivate'),
 
     Get().route('/dashboard/post/preview/@id', 'BlogEditorController@preview'),
-
+    
     Get().route('/dashboard/profile', 'ProfileController@show'),
-    # Post().route('/dashboard/profile/@id', 'ProfileController@store'),
+    Post().route('/dashboard/profile', 'ProfileController@store')
 
 
 ]

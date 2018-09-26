@@ -3,7 +3,7 @@
 
 <div class="col-xs-9">
 
-	<form action='/dashboard/profile/{{ Auth.user().user_name }}' method="POST" enctype="multipart/form-data">
+	<form action='/dashboard/profile' method="POST" enctype="multipart/form-data">
 	    {{ csrf_field|safe }}
 		
 		{# Name #}
@@ -15,13 +15,13 @@
 		<div class="form-row">
 		    <div class="form-group col-md-3">
 		      <label>Username</label>
-		      <input id="username" type="text" name="username" class="form-control" placeholder="{{ Auth.user().user_name }}"  readonly>
+		      <input id="username" type="text" name="username" class="form-control" value="{{ Auth.user().user_name }}"  readonly>
 		      <small id="emailHelp" class="form-text text-muted">Cannot be changed</small>
 		    </div>
 
 		    <div class="form-group col-md-6">
 		      <label>Name</label>
-		      <input id="name" type="text" name="name" placeholder="{{ Auth.user().name }}"></input>
+		      <input id="name" type="text" name="name" value="{{ Auth.user().name }}"></input>
 		    </div>
 		</div>
 		
@@ -34,38 +34,38 @@
 		<div class="form-row">
 			<div class="form-group col-md-12">
 		      <label>Email</label>
-		      <input id="email" type="text" name="email" placeholder="{{ Auth.user().email }}" required></input>
+		      <input id="email" type="text" name="email" value="{{ Auth.user().email }}" required></input>
 		      <small id="emailHelp" class="form-text text-muted">Required</small>
 		    </div>
 		</div>
 	    <div class="form-row">
 		    <div class="form-group col-md-12">
 		      <label>Website</label>
-		      <input id="website" type="text" name="website" placeholder="{{ Auth.user().website }}"></input>
+		      <input id="website" type="text" name="website" value="{{ Auth.user().website }}"></input>
 		    </div>
 		</div>
 	    <div class="form-row">
 		    <div class="form-group col-md-12">
 		      <label>Twitter</label>
-		      <input id="twitter" type="text" name="twitter" placeholder="{{ Auth.user().twitter }}">{{ Auth.user().twitter }}</input>
+		      <input id="twitter" type="text" name="twitter" value="{{ Auth.user().twitter }}">{{ Auth.user().twitter }}</input>
 		    </div>
 		</div>
 	    <div class="form-row">
 		    <div class="form-group col-md-12">
 		      <label>Facebook</label>
-		      <input id="facebook" type="text" name="facebook" placeholder="{{ Auth.user().facebook }}"></input>
+		      <input id="facebook" type="text" name="facebook" value="{{ Auth.user().facebook }}"></input>
 		    </div>
 		</div>
 	    <div class="form-row">
 		    <div class="form-group col-md-12">
 		      <label>Github</label>
-		      <input id="github" type="text" name="github" placeholder="{{ Auth.user().github }}"></input>
+		      <input id="github" type="text" name="github" value="{{ Auth.user().github }}"></input>
 		    </div>
 		</div>
 	    <div class="form-row">
 		    <div class="form-group col-md-12">
 		      <label>Gitlab</label>
-		      <input id="gitlab" type="text" name="gitlab" placeholder="{{ Auth.user().gitlab }}"></input>
+		      <input id="gitlab" type="text" name="gitlab" value="{{ Auth.user().gitlab }}"></input>
 		    </div>
 		</div>
 
@@ -79,17 +79,18 @@
 		    </div>
 		    <div class="form-group  col-md-12">
 			    {# Check if User has entered something in his bio #}
-			    {% if not Auth.user().bio == None %}
-			      <textarea name="body" class="form-control" rows="15" placeholder="{{ Auth.user().bio }}"></textarea>
+			    {% if Auth.user().bio != "" %}
+			      <textarea name="bio" class="form-control" rows="5">{{ Auth.user().bio }}</textarea>
 			    {% else %}
-			    	<textarea name="body" class="form-control" rows="15" placeholder="About me"></textarea>
-			   	{% endif %}
+				<textarea name="bio" class="form-control" rows="5">I am....</textarea>
+			    {% endif %}
 			      <small id="bodyHelp" class="form-text text-muted">Share a little biographical information to fill out your profile. This may be shown publicly.</small>
+
 		    </div>
 		</div>
 
 	    {# Account Management #}
-	    <div class="form-row">
+	    {# <div class="form-row">
 		    <div class="form-group  col-md-12">
 				<label><h1>Account Management</h1></label>
 			</div>
@@ -97,7 +98,7 @@
 		      <label>Change Password</label>
 		      <input name="password" type="password" placeholder="Enter New Password"></input>
 		    </div>
-	    </div>
+	    </div> #}
 		
 		<div class="form-row">
 		    <div class="form-group  col-md-12">

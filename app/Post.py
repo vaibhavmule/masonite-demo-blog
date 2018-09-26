@@ -13,7 +13,8 @@ class Post(Model):
                     'body',
                     'category',
                     'slug',
-                    'image']
+                    'image',
+                    'is_live']
 
     @belongs_to('author_id', 'id')
     def author(self):
