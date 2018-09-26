@@ -41,8 +41,8 @@ class PostsController(object):
 
         user_name = Request.param('id')
 
-        author = User.where('user_name', user_name).where('is_live', True).get()
+        author = User.where('user_name', user_name).get()
 
-        posts = Post.where('author_id', author[0].id).get()
+        posts = Post.where('author_id', author[0].id).where('is_live', True).get()
 
-        return view('blog/author', {'author': author[0].name, 'posts': posts})
+        return view('blog/author', {'author': author[0], 'posts': posts})

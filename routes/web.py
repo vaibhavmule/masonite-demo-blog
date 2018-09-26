@@ -31,6 +31,9 @@ ROUTES = [
 
     Get().route('/dashboard/post/preview/@id', 'BlogEditorController@preview'),
 
+    Get().route('/dashboard/profile', 'ProfileController@show'),
+    # Post().route('/dashboard/profile/@id', 'ProfileController@store'),
+
 
 ]
 
