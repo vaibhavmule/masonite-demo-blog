@@ -40,7 +40,7 @@ class ProfileController(object):
 
 		# Save image
 		try:
-			image = Upload.driver('disk').store(Request.input(
+			image = Upload.driver('s3').store(Request.input(
 				'file_upload'), location='storage/user/img')
 			user[0].image = image
 		except AttributeError:
