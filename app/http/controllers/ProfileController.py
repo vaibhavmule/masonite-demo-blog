@@ -41,7 +41,7 @@ class ProfileController(object):
 		# Save image
 		try:
 			image = Upload.driver('s3').store(Request.input(
-				'file_upload'), location='storage/user/img')
+				'file_upload'), location='public')
 			user[0].image = image
 		except AttributeError:
 			# If user did not pick image, check and see if there was a previous image. 
