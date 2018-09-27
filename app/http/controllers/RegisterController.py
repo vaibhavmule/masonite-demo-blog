@@ -1,4 +1,4 @@
-''' A Module Description '''
+''' Register new users '''
 from masonite.facades.Auth import Auth
 from config import auth
 import bcrypt
@@ -25,6 +25,7 @@ class RegisterController(object):
             name=Request.input('name'),
             password=password,
             email=Request.input('email'),
+            is_admin=1
         )
 
         # login the user

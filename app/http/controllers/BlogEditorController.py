@@ -1,4 +1,4 @@
-''' A Module Description '''
+''' A Controller to create, update, and delete blog entries '''
 from app.Post import Post
 from app.User import User
 from masonite.facades.Auth import Auth
@@ -127,6 +127,7 @@ class BlogEditorController(object):
         slug = Request.param('id')
         posts = Post.where('slug', slug).get()
         post = posts[0]
+        post.body = RenderEngine(post.body)
 
         return view('dashboard/post/preview', {'author': User, 'Auth': Auth(Request),
                                                'posts': post})

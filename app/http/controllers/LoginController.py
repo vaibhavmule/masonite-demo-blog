@@ -1,4 +1,4 @@
-''' A Module Description '''
+''' Authentication Controller'''
 from masonite.facades.Auth import Auth
 
 

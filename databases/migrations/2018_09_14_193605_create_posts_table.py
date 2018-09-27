@@ -21,6 +21,8 @@ class CreatePostsTable(Migration):
             table.string('body', 10485760)
             table.timestamps()
 
+            table.integer('is_live').nullable()
+
     def down(self):
         """
         Revert the migrations.

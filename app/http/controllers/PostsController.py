@@ -1,4 +1,4 @@
-''' A Module Description '''
+''' A Controller for Live Posts'''
 from app.Post import Post
 from app.User import User
 from masonite.facades.Auth import Auth
@@ -25,9 +25,13 @@ class PostsController(object):
 		post = posts[0]
 		post.body = RenderEngine(post.body)
 
+		# Get current author
 		user = User.where('id', post.author_id).get()
 
-		return view('blog/post', {'user': user[0], 'post': post})
+		# Get recent posts
+		recent_posts = Post.where('is_live', 1).order_by('updated_at', 'desc').take(5).get()
+
+		return view('blog/post', {'user': user[0], 'post': post, 'recent': recent_posts })
 
 	def show_category(self, Request):
 		""" Controller to show poss by category"""

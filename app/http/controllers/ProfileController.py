@@ -48,9 +48,6 @@ class ProfileController(object):
 			if user[0].image != "":
 				pass
 
-			
-
-		
 
 		# Change password
 		# if Request.input('password'):
