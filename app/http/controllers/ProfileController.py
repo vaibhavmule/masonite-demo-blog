@@ -20,7 +20,7 @@ class ProfileController(object):
 
 		return view('dashboard/profile', {'Auth': Auth(Request)})
 	
-	def store(self, Request):
+	def store(self, Request, Upload):
 		""" Store user profile information """
 
 		if not Auth(Request).user():
@@ -38,6 +38,17 @@ class ProfileController(object):
 		user[0].gitlab = remove_whitespaces(Request.input('gitlab'))
 		user[0].bio = remove_whitespaces(Request.input('bio'))
 
+		# Save image
+		try:
+			image = Upload.driver('disk').store(Request.input(
+				'file_upload'), location='storage/user/img')
+		except AttributeError:
+			# If user did not pick image, set image to empty. 
+			image = ""
+
+		user[0].image = image
+
+		# Change password
 		# if Request.input('password'):
 		# 	user[0].password = bcrypt_password(Request.input('password'))
 

@@ -6,8 +6,28 @@
 	<form action='/dashboard/profile' method="POST" enctype="multipart/form-data">
 	    {{ csrf_field|safe }}
 		
-		{# Name #}
+		
 		<div class="form-row">
+			{# Thumbnail #}
+			<div class="form-group col-md-12">
+				<label><h1>Profile Photo</h1></label>
+			</div>
+			<div class="form-group col-md-12">
+				<div class="form-group col-md-6">
+					{% if Auth.user().image  %}
+						 <img src="/img/{{ Auth.user().image }}" class="img-rounded" alt="profile photo" height="200px" width="300px"> 
+					 {% else %}
+						 test
+						 {% endif %}
+				</div>
+				<div class="form-group col-md-6">
+		          <label>Profile Image</label>
+		          <input type="file" name="file_upload">
+				</div>
+			</div>
+
+
+			{# Name #}
 			<div class="form-group col-md-12">
 				<label><h1>Name</h1></label>
 			</div>
