@@ -15,14 +15,16 @@
   </div>
 </header>
 
+
 <div class="col-lg-9 col-md-10 mx-auto">
   <div class="post-preview">
     {% for post in posts|reverse %}
     <a href="/blog/post/{{ post.slug }}">
       <h2 class="post-title post">
         {{ post.title }}
+      </h2>
     </a>
-    </h2>
+    
     {# Display when post was either created or last updated #}
           {% if  post.created_at.to_formatted_date_string() ==  post.updated_at.to_formatted_date_string() %}
               <p class="post-meta">Posted by

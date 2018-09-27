@@ -42,11 +42,15 @@ class ProfileController(object):
 		try:
 			image = Upload.driver('disk').store(Request.input(
 				'file_upload'), location='storage/user/img')
+			user[0].image = image
 		except AttributeError:
-			# If user did not pick image, set image to empty. 
-			image = ""
+			# If user did not pick image, check and see if there was a previous image. 
+			if user[0].image != "":
+				pass
 
-		user[0].image = image
+			
+
+		
 
 		# Change password
 		# if Request.input('password'):

@@ -25,7 +25,9 @@ class PostsController(object):
 		post = posts[0]
 		post.body = RenderEngine(post.body)
 
-		return view('blog/post', {'author': User, 'post': post})
+		user = User.where('id', post.author_id).get()
+
+		return view('blog/post', {'user': user[0], 'post': post})
 
 	def show_category(self, Request):
 		""" Controller to show poss by category"""
