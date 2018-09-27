@@ -2,6 +2,8 @@
 from app.Post import Post
 from app.User import User
 from masonite.facades.Auth import Auth
+from masonite.helpers import password as bcrypt_password
+
 from helpers.DashboardHelper import remove_whitespaces
 
 	
@@ -35,6 +37,10 @@ class ProfileController(object):
 		user[0].github = remove_whitespaces(Request.input('github'))
 		user[0].gitlab = remove_whitespaces(Request.input('gitlab'))
 		user[0].bio = remove_whitespaces(Request.input('bio'))
+
+		# if Request.input('password'):
+		# 	user[0].password = bcrypt_password(Request.input('password'))
+
 
 		# Update user info
 		user[0].save()

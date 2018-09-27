@@ -11,71 +11,76 @@
 			<div class="form-group col-md-12">
 				<label><h1>Name</h1></label>
 			</div>
-		</div>
-		<div class="form-row">
-		    <div class="form-group col-md-3">
-		      <label>Username</label>
-		      <input id="username" type="text" name="username" class="form-control" value="{{ Auth.user().user_name }}"  readonly>
-		      <small id="emailHelp" class="form-text text-muted">Cannot be changed</small>
-		    </div>
-
-		    <div class="form-group col-md-6">
-		      <label>Name</label>
+		    <div class="form-group col-md-12">
+		      <label>Username:</label>
+		  </div>
+		      <div class="form-group col-md-12">
+		      <input id="username" type="text" name="username" value="{{ Auth.user().user_name }}"  readonly>
+		  </div>
+		  <div class="form-group col-md-12">
+		      <small id="username" class="form-text text-muted">Cannot be changed</small>
+			</div>
+		    <div class="form-group col-md-12">
+		      <label>Full Name:</label>
+		  </div>
+		      <div class="form-group col-md-12">
 		      <input id="name" type="text" name="name" value="{{ Auth.user().name }}"></input>
-		    </div>
-		</div>
+		  </div>
 		
 		{# Contact Info #}
-		<div class="form-row">
 			<div class="form-group  col-md-12">
 				<label><h1>Contact Info</h1></label>
 			</div>
-		</div>
-		<div class="form-row">
 			<div class="form-group col-md-12">
-		      <label>Email</label>
+		      <label>Email:</label>
+		  </div>
+		      <div class="form-group col-md-12">
 		      <input id="email" type="text" name="email" value="{{ Auth.user().email }}" required></input>
 		      <small id="emailHelp" class="form-text text-muted">Required</small>
-		    </div>
-		</div>
-	    <div class="form-row">
+		  </div>
+
 		    <div class="form-group col-md-12">
-		      <label>Website</label>
+		      <label>Website:</label>
+		  </div>
+		      <div class="form-group col-md-12">
 		      <input id="website" type="text" name="website" value="{{ Auth.user().website }}"></input>
-		    </div>
-		</div>
-	    <div class="form-row">
+		  </div>
+		   
 		    <div class="form-group col-md-12">
-		      <label>Twitter</label>
+		      <label>Twitter:</label>
+		  </div>
+		      <div class="form-group col-md-12">
 		      <input id="twitter" type="text" name="twitter" value="{{ Auth.user().twitter }}">{{ Auth.user().twitter }}</input>
-		    </div>
-		</div>
-	    <div class="form-row">
+		  </div>
+		   
 		    <div class="form-group col-md-12">
-		      <label>Facebook</label>
+		      <label>Facebook:</label>
+		  </div>
+		      <div class="form-group col-md-12">
 		      <input id="facebook" type="text" name="facebook" value="{{ Auth.user().facebook }}"></input>
-		    </div>
-		</div>
-	    <div class="form-row">
+		  </div>
+		    
 		    <div class="form-group col-md-12">
-		      <label>Github</label>
+		      <label>Github:</label>
+		  </div>
+		      <div class="form-group col-md-12">
 		      <input id="github" type="text" name="github" value="{{ Auth.user().github }}"></input>
-		    </div>
-		</div>
-	    <div class="form-row">
+		  </div>
+		   
 		    <div class="form-group col-md-12">
-		      <label>Gitlab</label>
+		      <label>Gitlab:</label>
+		  </div>
+		      <div class="form-group col-md-12">
 		      <input id="gitlab" type="text" name="gitlab" value="{{ Auth.user().gitlab }}"></input>
-		    </div>
-		</div>
+		  </div>
+		   
 
 		{# Biographical Info #}
-		<div class="form-row">
 			<div class="form-group col-md-12">
 				<h1>About Yourself</h1>
 			</div>
 		    <div class="form-group  col-md-12">
-		      <label>Biographical Info</label>
+		      <label>Biographical Info:</label>
 		    </div>
 		    <div class="form-group  col-md-12">
 			    {# Check if User has entered something in his bio #}
@@ -90,21 +95,33 @@
 		</div>
 
 	    {# Account Management #}
-	    {# <div class="form-row">
-		    <div class="form-group  col-md-12">
+			  {# <div class="form-group  col-md-12">
 				<label><h1>Account Management</h1></label>
-			</div>
-		    <div class="form-group col-md-12">
-		      <label>Change Password</label>
-		      <input name="password" type="password" placeholder="Enter New Password"></input>
-		    </div>
-	    </div> #}
-		
-		<div class="form-row">
+			  </div>
+			  <div class="form-group col-md-12">
+			      <label>Change Password</label>
+			  </div>
+		      <div class="form-group col-md-12">
+			      <input name="password" type="password" placeholder="Enter New Password" ></input>
+			  </div>
+		      <div class="form-group col-md-12">
+			      <input name="confirm_password" type="password" placeholder="Confirm New Password" "></input>
+			  </div>
+			  <div class="form-group  col-md-12">
+			  	<style type="text/css">
+				  	div.alert {display: none;}
+			  	</style>
+				  <div id="match_alert" class="alert alert-danger" role="alert">
+					  Passwords do not match
+				  </div>
+			  </div>
+		      
+		    </div> #}
 		    <div class="form-group  col-md-12">
-			    <button type="submit" class="btn btn-primary">Update Profile</button>
+			    <button id="submit" type="submit" class="btn btn-primary">Update Profile</button>
 			</div>
-		</div>
+	    </div>
+		
 	</form>
 
 

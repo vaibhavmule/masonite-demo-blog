@@ -4,13 +4,13 @@ from app.User import User
 from masonite.facades.Auth import Auth
 
 from helpers.DashboardHelper import remove_whitespaces, slugify
-    
+
+
 class BlogEditorController(object):
     ''' Dashboard Blog Controller '''
 
     def __init__(self):
         pass
-        
 
     def show_all(self, Request):
         """ Display all posts in blog editor """
@@ -20,7 +20,7 @@ class BlogEditorController(object):
 
         posts = Post.all()
 
-        return view('dashboard/blog', {'author': User,'Auth': Auth(Request),
+        return view('dashboard/blog', {'author': User, 'Auth': Auth(Request),
                                        'posts': posts})
 
     def show_create(self, Request):
@@ -42,11 +42,11 @@ class BlogEditorController(object):
 
         # Save image
         try:
-            image=Upload.driver('disk').store(Request.input('file_upload'), location='storage/blog/img')
+            image = Upload.driver('disk').store(Request.input(
+                'file_upload'), location='storage/blog/img')
         except AttributeError:
             # If user did not pick image, set image to none. (Load default)
-            image="nightlife1.jpg"
-        
+            image = "nightlife1.jpg"
 
         Post.create(
             title=remove_whitespaces(Request.input('title')),
@@ -92,11 +92,9 @@ class BlogEditorController(object):
         post.save()
 
         return view('dashboard/post/update', {'Auth': Auth(Request)})
- 
 
     def show_delete(self, Request):
         """ Display Post Delete page """
-
 
         if not Auth(Request).user():
             Request.redirect('/dashboard')
@@ -131,7 +129,7 @@ class BlogEditorController(object):
         post = posts[0]
 
         return view('dashboard/post/preview', {'author': User, 'Auth': Auth(Request),
-                                       'posts': post})
+                                               'posts': post})
 
     def activate(self, Request):
         """ Activates post to be displayed """
