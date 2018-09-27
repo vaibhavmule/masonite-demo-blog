@@ -54,8 +54,8 @@ class BlogEditorController(object):
             category=remove_whitespaces(Request.input('category')),
             body=remove_whitespaces(Request.input('body')),
             image=image,
-            author_id=1,
-            is_live=0
+            author_id=Request.user().id,
+            is_live=1
         )
 
         return view('dashboard/blog', {'Auth': Auth(Request)})
