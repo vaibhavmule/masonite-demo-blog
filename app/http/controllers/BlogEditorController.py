@@ -43,7 +43,7 @@ class BlogEditorController(object):
         # Save image
         try:
             image = Upload.driver('s3').store(Request.input(
-                'file_upload'), location='public')
+                'file_upload'))
         except AttributeError:
             # If user did not pick image, set image to none. (Load default)
             image = "nightlife1.jpg"
