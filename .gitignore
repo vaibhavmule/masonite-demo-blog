@@ -3,6 +3,4 @@
 *__pycache__
 venv
 .env.*
-storage/blog/img/
-storage/user/img/
 .vscode
