@@ -6,3 +6,4 @@ venv
 .vscode
 storage/blog/img/
 storage/user/img/
+uploads/
