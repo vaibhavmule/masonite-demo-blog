@@ -38,7 +38,7 @@ class BlogEditorController(object):
             Request.redirect('/dashboard')
 
         # Make slug
-        slug = slugify(Request.input('body'))
+        slug = slugify(Request.input('title'))
 
         # Save image
         try:
