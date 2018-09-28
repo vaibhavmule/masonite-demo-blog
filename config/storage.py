@@ -33,8 +33,8 @@ DRIVERS = {
         'client': os.getenv('S3_CLIENT', 'AxJz...'),
         'secret': os.getenv('S3_SECRET', 'HkZj...'),
         'bucket': os.getenv('S3_BUCKET', 's3bucket'),
-        'location': os.getenv('S3_LOCATION', 'url')
-    }
+        'location': os.getenv('S3_LOCATION', 'url'),
+        }
 }
 
 
@@ -53,7 +53,7 @@ DRIVERS = {
 |
 '''
 
-STATICFILES = {
+STATICFILES={
     # folder          # template alias
     'storage/static': 'static/',
     'storage/compiled': 'static/',
@@ -85,7 +85,7 @@ STATICFILES = {
 |
 '''
 
-SASSFILES = {
+SASSFILES={
     'importFrom': [
         'storage/static'
     ],
