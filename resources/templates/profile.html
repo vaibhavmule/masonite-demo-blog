@@ -16,10 +16,10 @@
     <div class="author__avatar">
         {% if user.website %}
         <a href="{{ user.website }}">
-            <img src="/img/{{ user.image }}" class="avatar" alt="{{ user.website }}" itemprop="image">
+            <img src="{{ static('s3', user.image) }}" class="avatar" alt="{{ user.website }}" itemprop="image">
         </a>
         {% else %}
-        <img src="/img/{{ user.image }}" class="avatar" alt="{{ user.website }}" itemprop="image"> {% endif %}
+        <img src="{{ static('s3', user.image) }}" class="avatar" alt="{{ user.website }}" itemprop="image"> {% endif %}
     </div>
 
     <div class="author__content">

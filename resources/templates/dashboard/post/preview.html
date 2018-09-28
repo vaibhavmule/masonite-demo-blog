@@ -2,11 +2,8 @@
 {% block content %}
 
 
-
-
-
 <!-- Page Header -->
-<header class="masthead" style="background-image: url('/img/{{ post.image }}')">
+<header class="masthead" style="background-image: url('{{ static('s3', post.image) }}')">
   <div class="overlay"></div>
   <div class="container">
     <div class="row">

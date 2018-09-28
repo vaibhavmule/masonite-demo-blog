@@ -33,6 +33,7 @@ DRIVERS = {
         'client': os.getenv('S3_CLIENT', 'AxJz...'),
         'secret': os.getenv('S3_SECRET', 'HkZj...'),
         'bucket': os.getenv('S3_BUCKET', 's3bucket'),
+        'location': os.getenv('S3_LOCATION', 'url')
     }
 }
 
