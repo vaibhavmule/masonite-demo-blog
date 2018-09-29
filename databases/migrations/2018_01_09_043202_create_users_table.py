@@ -24,11 +24,6 @@ class CreateUsersTable(Migration):
             table.string('gitlab').nullable()
             table.string('linkedin').nullable()
             table.string('website').nullable()
-            table.string('remember_token').nullable()
-            table.string('remember_token').nullable()
-
-
-
 
     def down(self):
         """
