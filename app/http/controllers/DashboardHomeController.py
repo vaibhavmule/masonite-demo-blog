@@ -1,7 +1,7 @@
 ''' Dashboard Controller '''
 from masonite.facades.Auth import Auth
 
-class HomeController(object):
+class DashboardHomeController(object):
     ''' Home Dashboard Controller '''
 
     def __init__(self):

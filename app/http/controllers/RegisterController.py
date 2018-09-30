@@ -28,8 +28,7 @@ class RegisterController(object):
             is_admin=1
         )
 
-        # login the user
-        # redirect to the homepage
+        # login the user and redirect to the homepage if user cannot login
         if Auth(Request).login(Request.input(auth.AUTH['model'].__auth__), Request.input('password')):
             return Request.redirect('/home')
 

@@ -37,9 +37,6 @@ class BlogEditorController(object):
         if not Auth(Request).user():
             Request.redirect('/dashboard')
 
-        # Make slug
-        slug = slugify(Request.input('title'))
-
         # Save image
         try:
             image = Upload.driver('s3').store_prepend(Request.input('file_upload'), 'blog/img/')
@@ -49,7 +46,7 @@ class BlogEditorController(object):
 
         Post.create(
             title=remove_whitespaces(Request.input('title')),
-            slug=slug,
+            slug=slugify(remove_whitespaces(Request.input('title'))),
             category=remove_whitespaces(Request.input('category')),
             body=remove_whitespaces(Request.input('body')),
             image=image,
@@ -66,8 +63,7 @@ class BlogEditorController(object):
             Request.redirect('/dashboard')
 
         # Get post via slug
-        slug = Request.param('id')
-        posts = Post.where('slug', slug).get()
+        posts = Post.where('slug', Request.param('id')).get()
         post = posts[0]
 
         return view('dashboard/post/update', {'post': post, 'Auth': Auth(Request)})
@@ -78,8 +74,8 @@ class BlogEditorController(object):
         if not Auth(Request).user():
             Request.redirect('/dashboard')
 
-        slug = Request.param('id')
-        posts = Post.where('slug', slug).get()
+        # Get post via slug
+        posts = Post.where('slug', Request.param('id')).get()
         post = posts[0]
 
         # Updates Post
@@ -98,8 +94,8 @@ class BlogEditorController(object):
         if not Auth(Request).user():
             Request.redirect('/dashboard')
 
-        slug = Request.param('id')
-        posts = Post.where('slug', slug).get()
+        # Get post via slug
+        posts = Post.where('slug', Request.param('id')).get()
         post = posts[0]
 
         return view('dashboard/post/delete', {'post': post, 'Auth': Auth(Request)})
@@ -110,10 +106,12 @@ class BlogEditorController(object):
         if not Auth(Request).user():
             Request.redirect('/dashboard')
 
-        slug = Request.param('id')
-        posts = Post.where('slug', slug).get()
+        # Get post via slug
+        posts = Post.where('slug', Request.param('id')).get()
         post = posts[0]
+
         post.delete()
+
         return Request.redirect('dashboard/blog', {'Auth': Auth(Request)})
 
     def preview(self, Request, RenderEngine):
@@ -123,8 +121,7 @@ class BlogEditorController(object):
             Request.redirect('dashboard')
 
         # Get post via slug
-        slug = Request.param('id')
-        posts = Post.where('slug', slug).get()
+        posts = Post.where('slug', Request.param('id')).get()
         post = posts[0]
         post.body = RenderEngine(post.body)
 
@@ -136,11 +133,13 @@ class BlogEditorController(object):
         if not Auth(Request).user():
             Request.redirect('dashboard')
 
-        slug = Request.param('id')
-        posts = Post.where('slug', slug).get()
+        # Get post via slug
+        posts = Post.where('slug', Request.param('id')).get()
         post = posts[0]
-        post.is_live = True
+
+        post.is_live = 1
         post.save()
+
         return Request.redirect('dashboard/blog', {'Auth': Auth(Request)})
 
     def deactivate(self, Request):
@@ -149,9 +148,11 @@ class BlogEditorController(object):
         if not Auth(Request).user():
             Request.redirect('dashboard')
 
-        slug = Request.param('id')
-        posts = Post.where('slug', slug).get()
+        # Get post via slug
+        posts = Post.where('slug', Request.param('id')).get()
         post = posts[0]
-        post.is_live = False
+
+        post.is_live = 0
         post.save()
+        
         return Request.redirect('dashboard/blog', {'Auth': Auth(Request)})

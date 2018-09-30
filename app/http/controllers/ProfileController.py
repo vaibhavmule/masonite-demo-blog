@@ -26,10 +26,10 @@ class ProfileController(object):
 		if not Auth(Request).user():
 			Request.redirect('dashboard')
 
-		user_name = Auth(Request).user().user_name
-		user = User.where('user_name', user_name).get()
+		# Get current user
+		user = User.where('user_name', Auth(Request).user().user_name).get()
 
-		# Get new user info
+		# Update user info
 		user[0].name = remove_whitespaces(Request.input('name'))
 		user[0].website = remove_whitespaces(Request.input('website'))
 		user[0].twitter = remove_whitespaces(Request.input('twitter'))
@@ -46,12 +46,6 @@ class ProfileController(object):
 			# If user did not pick image, check and see if there was a previous image. 
 			if user[0].image != "":
 				pass
-
-
-		# Change password
-		# if Request.input('password'):
-		# 	user[0].password = bcrypt_password(Request.input('password'))
-
 
 		# Update user info
 		user[0].save()
