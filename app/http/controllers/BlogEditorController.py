@@ -15,9 +15,6 @@ class BlogEditorController(object):
     def show_all(self, Request):
         """ Display all posts in blog editor """
 
-        if not Auth(Request).user():
-            Request.redirect('dashboard')
-
         posts = Post.all()
 
         return view('dashboard/blog', {'author': User, 'Auth': Auth(Request),
@@ -26,16 +23,10 @@ class BlogEditorController(object):
     def show_create(self, Request):
         """ Display page to create post"""
 
-        if not Auth(Request).user():
-            Request.redirect('/dashboard')
-
         return view('dashboard/post/create', {'Auth': Auth(Request)})
 
     def create(self, Request, Upload):
         """ Create new post """
-
-        if not Auth(Request).user():
-            Request.redirect('/dashboard')
 
         # Save image
         try:
@@ -59,9 +50,6 @@ class BlogEditorController(object):
     def show_update(self, Request):
         """ Display Post Update page """
 
-        if not Auth(Request).user():
-            Request.redirect('/dashboard')
-
         # Get post via slug
         posts = Post.where('slug', Request.param('id')).get()
         post = posts[0]
@@ -70,9 +58,6 @@ class BlogEditorController(object):
 
     def update(self, Request):
         """ Update Post Controller """
-
-        if not Auth(Request).user():
-            Request.redirect('/dashboard')
 
         # Get post via slug
         posts = Post.where('slug', Request.param('id')).get()
@@ -91,9 +76,6 @@ class BlogEditorController(object):
     def show_delete(self, Request):
         """ Display Post Delete page """
 
-        if not Auth(Request).user():
-            Request.redirect('/dashboard')
-
         # Get post via slug
         posts = Post.where('slug', Request.param('id')).get()
         post = posts[0]
@@ -102,9 +84,6 @@ class BlogEditorController(object):
 
     def delete(self, Request):
         """ Delete Post Controller """
-
-        if not Auth(Request).user():
-            Request.redirect('/dashboard')
 
         # Get post via slug
         posts = Post.where('slug', Request.param('id')).get()
@@ -117,9 +96,6 @@ class BlogEditorController(object):
     def preview(self, Request, RenderEngine):
         """ Display all posts in blog editor """
 
-        if not Auth(Request).user():
-            Request.redirect('dashboard')
-
         # Get post via slug
         posts = Post.where('slug', Request.param('id')).get()
         post = posts[0]
@@ -130,8 +106,6 @@ class BlogEditorController(object):
 
     def activate(self, Request):
         """ Activates post to be displayed """
-        if not Auth(Request).user():
-            Request.redirect('dashboard')
 
         # Get post via slug
         posts = Post.where('slug', Request.param('id')).get()
@@ -144,9 +118,6 @@ class BlogEditorController(object):
 
     def deactivate(self, Request):
         """ Removes post from active list """
-
-        if not Auth(Request).user():
-            Request.redirect('dashboard')
 
         # Get post via slug
         posts = Post.where('slug', Request.param('id')).get()

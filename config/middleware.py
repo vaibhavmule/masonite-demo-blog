@@ -32,6 +32,5 @@ HTTP_MIDDLEWARE = [
 '''
 
 ROUTE_MIDDLEWARE = {
-    'auth':  'app.http.middleware.AuthenticationMiddleware.AuthenticationMiddleware',
-    'dashboard_auth': 'app.http.middleware.DashboardAuthenticationMiddleware.DashboardAuthenticationMiddleware',
+    'auth':  'app.http.middleware.AuthenticationMiddleware.AuthenticationMiddleware'
 }

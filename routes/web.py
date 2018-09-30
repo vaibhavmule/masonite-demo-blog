@@ -1,46 +1,44 @@
 ''' Web Routes '''
-from masonite.routes import Get, Post, Put, Delete
+from masonite.routes import Get, Post
+from masonite.routes import RouteGroup
 from dashboard.routes import routes as DashboardRoutes
 
 ROUTES = [
     Get().route('/', 'HomeController@show').name('welcome'),
 
+    # Blog
+    RouteGroup([
+        Get().route('/blog', 'PostsController@show_all'),
+        Get().route('/blog/post/@id', 'PostsController@show_one'),
+        Get().route('/blog/category/@id', 'PostsController@show_category'),
+        Get().route('/blog/author/@id', 'PostsController@show_author'),
+    ]),
+
+    # Dashboard
     DashboardRoutes(),
 
-    Get().route('/blog', 'PostsController@show_all'),
-    Get().route('/blog/post/@id', 'PostsController@show_one'),
+    RouteGroup([
+        Get().route('/blog', 'BlogEditorController@show_all'),
+        Get().route('/profile', 'ProfileController@show'),
+        Post().route('/profile', 'ProfileController@store'),
 
+        # Blog Editor
+        RouteGroup([
+            Get().route('/create', 'BlogEditorController@show_create'),
+            Post().route('/create', 'BlogEditorController@create'),
 
-    Get().route('/blog/category/@id', 'PostsController@show_category'),
-    Get().route('/blog/author/@id', 'PostsController@show_author'),
+            Get().route('/@id/update', 'BlogEditorController@show_update'),
+            Post().route('/@id/update', 'BlogEditorController@update'),
 
-    Get().route('/dashboard/blog', 'BlogEditorController@show_all'),
+            Get().route('/@id/delete', 'BlogEditorController@show_delete'),
+            Post().route('/@id/delete', 'BlogEditorController@delete'),
 
-    Get().route('/dashboard/post/create', 'BlogEditorController@show_create'),
-    Post().route('/dashboard/post/create', 'BlogEditorController@create'),
+            Get().route('/@id/activate', 'BlogEditorController@activate'),
+            Get().route('/@id/deactivate', 'BlogEditorController@deactivate'),
 
-    Get().route('/dashboard/post/@id/update', 'BlogEditorController@show_update'),
-    Post().route('/dashboard/post/@id/update', 'BlogEditorController@update'),
+            Get().route('/preview/@id', 'BlogEditorController@preview')
+        ], prefix="/post")
 
-    Get().route('/dashboard/post/@id/delete', 'BlogEditorController@show_delete'),
-    Post().route('/dashboard/post/@id/delete', 'BlogEditorController@delete'),
+    ], prefix='/dashboard', middleware=('auth',))
 
-    Get().route('/dashboard/post/@id/activate', 'BlogEditorController@activate'),
-    Get().route('/dashboard/post/@id/deactivate', 'BlogEditorController@deactivate'),
-
-    Get().route('/dashboard/post/preview/@id', 'BlogEditorController@preview'),
-    
-    Get().route('/dashboard/profile', 'ProfileController@show'),
-    Post().route('/dashboard/profile', 'ProfileController@store')
-
-
-]
-
-ROUTES = ROUTES + [
-    Get().route('/login', 'LoginController@show'),
-    Get().route('/logout', 'LoginController@logout'),
-    Post().route('/login', 'LoginController@store'),
-    # Get().route('/register', 'RegisterController@show'),
-    # Post().route('/register', 'RegisterController@store'),
-    Get().route('/home', 'HomeController@show'),
 ]

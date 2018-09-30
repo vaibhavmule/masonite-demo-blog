@@ -15,16 +15,10 @@ class ProfileController(object):
 	def show(self, Request):
 		""" Controller to show user profile page """
 
-		if not Auth(Request).user():
-			Request.redirect('dashboard')
-
 		return view('dashboard/profile', {'Auth': Auth(Request)})
 	
 	def store(self, Request, Upload):
 		""" Store user profile information """
-
-		if not Auth(Request).user():
-			Request.redirect('dashboard')
 
 		# Get current user
 		user = User.where('user_name', Auth(Request).user().user_name).get()
