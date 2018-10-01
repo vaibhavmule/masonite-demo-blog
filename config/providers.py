@@ -21,6 +21,9 @@ from app.providers.BlogProvider import BlogProvider
 from app.providers.RenderEngineProvider import RenderEngineProvider
 from app.providers.MiddlewareProvider import MiddlewareProvider
 from app.providers.UserModelProvider import UserModelProvider
+from app.providers.RouteCompileProvider import RouteCompileProvider
+
+
 from dashboard.providers import DashboardProvider
 '''
 |--------------------------------------------------------------------------
@@ -58,6 +61,7 @@ PROVIDERS = [
 
     # Third Party Providers
     RenderEngineProvider,
+    RouteCompileProvider,
 
     # Application Providers
     UserModelProvider,
