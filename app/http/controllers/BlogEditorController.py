@@ -51,45 +51,41 @@ class BlogEditorController(object):
         """ Display Post Update page """
 
         # Get post via slug
-        posts = Post.where('slug', Request.param('id')).get()
-        post = posts[0]
+        posts = Post.where('slug', Request.param('slug')).get()
 
-        return view('dashboard/post/update', {'post': post, 'Auth': Auth(Request)})
+        return view('dashboard/post/update', {'post': posts[0], 'Auth': Auth(Request)})
 
     def update(self, Request):
         """ Update Post Controller """
 
         # Get post via slug
-        posts = Post.where('slug', Request.param('id')).get()
-        post = posts[0]
+        posts = Post.where('slug', Request.param('slug')).get()
 
         # Updates Post
-        post.title = remove_whitespaces(Request.input('title'))
-        post.slug = slugify(post.title)
-        post.body = remove_whitespaces(Request.input('body'))
-        post.category = remove_whitespaces(Request.input('category'))
+        posts[0].title = remove_whitespaces(Request.input('title'))
+        posts[0].slug = slugify(posts[0].title)
+        posts[0].body = remove_whitespaces(Request.input('body'))
+        posts[0].category = remove_whitespaces(Request.input('category'))
 
-        post.save()
+        posts[0].save()
 
-        return Request.redirect('dashboard/post/{}/update'.format(post.slug), {'Auth': Auth(Request)})
+        return Request.redirect('dashboard/post/{}/update'.format(posts[0].slug), {'Auth': Auth(Request)})
 
     def show_delete(self, Request):
         """ Display Post Delete page """
 
         # Get post via slug
-        posts = Post.where('slug', Request.param('id')).get()
-        post = posts[0]
+        posts = Post.where('slug', Request.param('slug')).get()
 
-        return view('dashboard/post/delete', {'post': post, 'Auth': Auth(Request)})
+        return view('dashboard/post/delete', {'post': posts[0], 'Auth': Auth(Request)})
 
     def delete(self, Request):
         """ Delete Post Controller """
 
         # Get post via slug
-        posts = Post.where('slug', Request.param('id')).get()
-        post = posts[0]
+        posts = Post.where('slug', Request.param('slug')).get()
 
-        post.delete()
+        posts[0].delete()
 
         return Request.redirect('dashboard/blog', {'Auth': Auth(Request)})
 
@@ -97,22 +93,19 @@ class BlogEditorController(object):
         """ Display all posts in blog editor """
 
         # Get post via slug
-        posts = Post.where('slug', Request.param('id')).get()
-        post = posts[0]
-        post.body = RenderEngine(post.body)
+        posts = Post.where('slug', Request.param('slug')).get()
+        posts[0].body = RenderEngine(posts[0].body)
 
         return view('dashboard/post/preview', {'author': User, 'Auth': Auth(Request),
-                                               'posts': post})
+                                               'posts': posts[0]})
 
     def activate(self, Request):
         """ Activates post to be displayed """
 
         # Get post via slug
-        posts = Post.where('slug', Request.param('id')).get()
-        post = posts[0]
-
-        post.is_live = 1
-        post.save()
+        posts = Post.where('slug', Request.param('slug')).get()
+        posts[0].is_live = 1
+        posts[0].save()
 
         return Request.redirect('dashboard/blog', {'Auth': Auth(Request)})
 
@@ -120,10 +113,8 @@ class BlogEditorController(object):
         """ Removes post from active list """
 
         # Get post via slug
-        posts = Post.where('slug', Request.param('id')).get()
-        post = posts[0]
-
-        post.is_live = 0
-        post.save()
+        posts = Post.where('slug', Request.param('slug')).get()
+        posts[0].is_live = 0
+        posts[0].save()
         
         return Request.redirect('dashboard/blog', {'Auth': Auth(Request)})
