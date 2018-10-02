@@ -11,6 +11,6 @@ class DashboardHomeController(object):
     	""" Show Dasboard page """
 
         if not Auth(Request).user():
-            Request.redirect('/login')
+            Request.redirect('/dashboard/login')
 
         return view('auth/home', {'app': Application, 'Auth': Auth(Request)})

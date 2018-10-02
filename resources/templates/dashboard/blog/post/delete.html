@@ -3,7 +3,7 @@
 
 <div class="col-xs-9">
 
-    <form action='/dashboard/post/{{ post.slug }}/delete' method="POST">
+    <form action='/dashboard/blog/post/{{ post.slug }}/delete' method="POST">
         {{ csrf_field|safe }}
         <div class="form-group">
             <label>
@@ -11,7 +11,7 @@
             </label> ​
         </div>
         <button type="delete" class="btn btn-primary">Delete</button>
-         <a class="btn btn-primary" href="/dashboard/blog" role="button">Cancel</a>
+         <a class="btn btn-primary" href="/dashboard/blog/main" role="button">Cancel</a>
     </form>
 
 </div>

@@ -1,7 +1,7 @@
 {% extends "dashboard/base.html" %}
 {% block content %}
 <div class="col-xs-9">
-<form action='/dashboard/post/create' method="POST" enctype="multipart/form-data">
+<form action='/dashboard/blog/post/create' method="POST" enctype="multipart/form-data">
     {{ csrf_field|safe }}
 
         <div class="form-group">
@@ -23,7 +23,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
-        <a class="btn btn-primary" href="/dashboard/blog" role="button">Cancel</a>
+        <a class="btn btn-primary" href="/dashboard/blog/main" role="button">Cancel</a>
       </form>        
     </form>
     </div>

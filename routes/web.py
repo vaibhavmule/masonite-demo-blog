@@ -16,28 +16,36 @@ ROUTES = [
 
     # Dashboard
     DashboardRoutes(),
-
     RouteGroup([
-        Get().route('/blog', 'BlogEditorController@show_all'),
-        Get().route('/profile', 'ProfileController@show'),
-        Post().route('/profile', 'ProfileController@store'),
 
-        # Blog Editor
+        # Dashboard - User
         RouteGroup([
-            Get().route('/create', 'BlogEditorController@show_create'),
-            Post().route('/create', 'BlogEditorController@create'),
+            Get().route('/profile', 'ProfileController@show'),
+            Post().route('/profile', 'ProfileController@store'),
+        ], prefix="/user"),
 
-            Get().route('/@slug/update', 'BlogEditorController@show_update'),
-            Post().route('/@slug/update', 'BlogEditorController@update'),
+        # Dashboard - Blog
+        RouteGroup([
+            Get().route('/main', 'BlogEditorController@show_all'),
 
-            Get().route('/@slug/delete', 'BlogEditorController@show_delete'),
-            Post().route('/@slug/delete', 'BlogEditorController@delete'),
+                # Blog Editor
+                RouteGroup([
+                    Get().route('/create', 'BlogEditorController@show_create'),
+                    Post().route('/create', 'BlogEditorController@create'),
 
-            Get().route('/@slug/activate', 'BlogEditorController@activate'),
-            Get().route('/@slug/deactivate', 'BlogEditorController@deactivate'),
+                    Get().route('/@slug/update', 'BlogEditorController@show_update'),
+                    Post().route('/@slug/update', 'BlogEditorController@update'),
 
-            Get().route('/preview/@slug', 'BlogEditorController@preview')
-        ], prefix="/post")
+                    Get().route('/@slug/delete', 'BlogEditorController@show_delete'),
+                    Post().route('/@slug/delete', 'BlogEditorController@delete'),
+
+                    Get().route('/@slug/activate', 'BlogEditorController@activate'),
+                    Get().route('/@slug/deactivate', 'BlogEditorController@deactivate'),
+
+                    Get().route('/preview/@slug', 'BlogEditorController@preview')
+                ], prefix="/post")
+
+            ], prefix="/blog")        
 
     ], prefix='/dashboard', middleware=('auth',))
 

@@ -3,11 +3,11 @@ from dashboard.Link import BaseLink, UserLink
 
 class BlogEditorLink(BaseLink):
     display = 'Blog'
-    url = '/dashboard/blog'
+    url = '/dashboard/blog/main'
 
 class ProfileLink(UserLink):
     display = 'Profile'
-    url = '/dashboard/profile'
+    url = '/dashboard/user/profile'
 
 # class ManagementLink(UserLink):
 #     display = 'Profile'

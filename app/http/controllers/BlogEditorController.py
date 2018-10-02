@@ -17,13 +17,13 @@ class BlogEditorController(object):
 
         posts = Post.all()
 
-        return view('dashboard/blog', {'author': User, 'Auth': Auth(Request),
+        return view('dashboard/blog/main', {'author': User, 'Auth': Auth(Request),
                                        'posts': posts})
 
     def show_create(self, Request):
         """ Display page to create post"""
 
-        return view('dashboard/post/create', {'Auth': Auth(Request)})
+        return view('dashboard/blog/post/create', {'Auth': Auth(Request)})
 
     def create(self, Request, Upload):
         """ Create new post """
@@ -45,7 +45,7 @@ class BlogEditorController(object):
             is_live=1
         )
 
-        return Request.redirect('dashboard/blog', {'Auth': Auth(Request)})
+        return Request.redirect('dashboard/blog/main', {'Auth': Auth(Request)})
 
     def show_update(self, Request):
         """ Display Post Update page """
@@ -53,7 +53,7 @@ class BlogEditorController(object):
         # Get post via slug
         posts = Post.where('slug', Request.param('slug')).get()
 
-        return view('dashboard/post/update', {'post': posts[0], 'Auth': Auth(Request)})
+        return view('dashboard/blog/post/update', {'post': posts[0], 'Auth': Auth(Request)})
 
     def update(self, Request):
         """ Update Post Controller """
@@ -69,7 +69,7 @@ class BlogEditorController(object):
 
         posts[0].save()
 
-        return Request.redirect('dashboard/post/{}/update'.format(posts[0].slug), {'Auth': Auth(Request)})
+        return Request.redirect('dashboard/blog/post/{}/update'.format(posts[0].slug), {'Auth': Auth(Request)})
 
     def show_delete(self, Request):
         """ Display Post Delete page """
@@ -77,7 +77,7 @@ class BlogEditorController(object):
         # Get post via slug
         posts = Post.where('slug', Request.param('slug')).get()
 
-        return view('dashboard/post/delete', {'post': posts[0], 'Auth': Auth(Request)})
+        return view('dashboard/blog/post/delete', {'post': posts[0], 'Auth': Auth(Request)})
 
     def delete(self, Request):
         """ Delete Post Controller """
@@ -87,7 +87,7 @@ class BlogEditorController(object):
 
         posts[0].delete()
 
-        return Request.redirect('dashboard/blog', {'Auth': Auth(Request)})
+        return Request.redirect('dashboard/blog/main', {'Auth': Auth(Request)})
 
     def preview(self, Request, RenderEngine):
         """ Display all posts in blog editor """
@@ -96,7 +96,7 @@ class BlogEditorController(object):
         posts = Post.where('slug', Request.param('slug')).get()
         posts[0].body = RenderEngine(posts[0].body)
 
-        return view('dashboard/post/preview', {'author': User, 'Auth': Auth(Request),
+        return view('dashboard/blog/post/preview', {'author': User, 'Auth': Auth(Request),
                                                'posts': posts[0]})
 
     def activate(self, Request):
@@ -107,7 +107,7 @@ class BlogEditorController(object):
         posts[0].is_live = 1
         posts[0].save()
 
-        return Request.redirect('dashboard/blog', {'Auth': Auth(Request)})
+        return Request.redirect('dashboard/blog/main', {'Auth': Auth(Request)})
 
     def deactivate(self, Request):
         """ Removes post from active list """
@@ -117,4 +117,4 @@ class BlogEditorController(object):
         posts[0].is_live = 0
         posts[0].save()
         
-        return Request.redirect('dashboard/blog', {'Auth': Auth(Request)})
+        return Request.redirect('dashboard/blog/main', {'Auth': Auth(Request)})

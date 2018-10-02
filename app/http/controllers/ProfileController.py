@@ -15,7 +15,7 @@ class ProfileController(object):
 	def show(self, Request):
 		""" Controller to show user profile page """
 
-		return view('dashboard/profile', {'Auth': Auth(Request)})
+		return view('dashboard/user/profile', {'Auth': Auth(Request)})
 	
 	def store(self, Request, Upload):
 		""" Store user profile information """
@@ -44,5 +44,5 @@ class ProfileController(object):
 		# Update user info
 		user[0].save()
 
-		return view('dashboard/profile', {'Auth': Auth(Request)})
+		return view('dashboard/user/profile', {'Auth': Auth(Request)})
 
